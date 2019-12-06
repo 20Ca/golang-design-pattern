@@ -7,6 +7,10 @@ type Subject struct {
 	context   string
 }
 
+type Observer interface {
+	Update(*Subject)
+}
+
 func NewSubject() *Subject {
 	return &Subject{
 		observers: make([]Observer, 0),
@@ -26,10 +30,6 @@ func (s *Subject) notify() {
 func (s *Subject) UpdateContext(context string) {
 	s.context = context
 	s.notify()
-}
-
-type Observer interface {
-	Update(*Subject)
 }
 
 type Reader struct {
